@@ -30,6 +30,8 @@ then
 	exit
 fi
 
+chown -R $user:$user /home/$user/arch-ignition-key
+
 BLUE "   Would you like to install intel graphics drivers?"
 read -n1 -p "   Please type Y or N : " userinput
 case $userinput in
@@ -40,31 +42,52 @@ esac
 
 BLUE "[*] Installing yay..."
 pacman -S --needed git base-devel --noconfirm
-su - nicolas -c "git clone https://aur.archlinux.org/yay.git"
-su - nicolas -c "cd yay; makepkg -si"
+su - $user -c "git clone https://aur.archlinux.org/yay.git"
+su - $user -c "cd yay; makepkg -si"
 
 BLUE "[*] Installing kitty..."
 pacman -S --noconfirm kitty
 
 BLUE "[*] Installing Hyprland..."
-yay -S --answerdiff=None --noconfirm hyprland
+su - $user -c "yay -S --answerdiff=None --noconfirm hyprland"
 
 BLUE "[*] Installing Hyprpaper..."
-yay -S --answerdiff=None --noconfirm hyprpaper-git
+su - $user -c "yay -S --answerdiff=None --noconfirm hyprpaper-git"
 
 BLUE "[*] Installing SDDM..."
-pacman -S --noconfirm sddm
+su - $user -c "yay -S --answerdiff=None --noconfirm sddm-git"
+
+BLUE "[*] Installing Discord..."
+su - $user -c "yay -S --answerdiff=None --noconfirm discord"
+
+BLUE "[*] Installing Fish..."
+su - $user -c "yay -S --answerdiff=None --noconfirm fish"
+
+BLUE "[*] Installing Neovim..."
+su - $user -c "yay -S --answerdiff=None --noconfirm neovim"
+
+BLUE "[*] Installing Spotify..."
+su - $user -c "yay -S --answerdiff=None --noconfirm spotifyd 
+su - $user -c "yay -S --answerdiff=None --noconfirm spotify-tui
+
 
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){
         # Bash dotfiles
-	mkdir /home/$user/.config && mkdir /home/$user/.config/hypr
-	cp -r ./dotfiles/arch/hypr /home/$user/.config/hypr
-	cp -r ./dotfiles/arch/sddm/themes /usr/share/sddm
-	cp ./dotfiles/arch/sddm/sddm.conf /etc/sddm.conf
-	mkdir /home/$user/Pictures
-	cp ./wallpapers /home/$user/Pictures
-	echo -e "preload = /home/$user/Pictures/wallpaperflare.com_wallpaper.jpg\nwallpaper = eDP-1,/home/$user/Pictures/wallpaperflare.com_wallpaper.jpg"
+	su - $user -c "mkdir /home/$user/.config; mkdir /home/$user/.config/hypr"
+	su - $user -c "cp -r ./arch-ignition-key/dotfiles/hypr /home/$user/.config/hypr"
+	su - $user -c "cp -r ./arch-ignition-key/dotfiles/sddm/themes /usr/share/sddm"
+	su - $user -c "cp ./arch-ignition-key/dotfiles/sddm/sddm.conf /etc/sddm.conf"
+	su - $user -c "mkdir /home/$user/Pictures"
+	su - $user -c "cp -r ./arch-ignition-key/wallpapers /home/$user/Pictures"
+	su - $user -c "cp -r ./arch-ignition-key/dotfiles/kitty /home/$user/.config/kitty"
+	cp -r /home/$user/arch-ignition-key/dotfiles/grub/themes/sleek /usr/share/grub/themes/sleek
+	echo -e "preload = /home/$user/Pictures/nezuko.jpg\nwallpaper = eDP-1,/home/$user/Pictures/nezuko.jpg"
+	git clone https://github.com/mlvzk/discocss
+	cp discocss/discocss /usr/bin
+	su - $user -c "mkdir /home/$user/.config/discocss"
+	curl -L https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css > ~/.config/discocss/custom.css
+	discocss
 }
 
 BLUE "   Would you like to copy modified dotfiles?"

@@ -30,6 +30,9 @@ then
 	exit
 fi
 
+# Allow nopassword sudo usage for this script
+echo "$user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
 chown -R $user:$user /home/$user/arch-ignition-key
 
 BLUE "   Would you like to install intel graphics drivers?"
@@ -41,53 +44,91 @@ case $userinput in
 esac
 
 BLUE "[*] Installing yay..."
-pacman -S --needed git base-devel --noconfirm
+pacman -S --needed git base-devel --noconfirm --needed
 su - $user -c "git clone https://aur.archlinux.org/yay.git"
 su - $user -c "cd yay; makepkg -si"
 
 BLUE "[*] Installing kitty..."
-pacman -S --noconfirm kitty
+pacman -S --noconfirm --needed kitty
 
 BLUE "[*] Installing Hyprland..."
-su - $user -c "yay -S --answerdiff=None --noconfirm hyprland"
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed hyprland"
 
 BLUE "[*] Installing Hyprpaper..."
-su - $user -c "yay -S --answerdiff=None --noconfirm hyprpaper-git"
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed hyprpaper-git"
 
 BLUE "[*] Installing SDDM..."
-su - $user -c "yay -S --answerdiff=None --noconfirm sddm-git"
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed sddm-git"
+pacman -Syu --noconfirm --needed qt5-graphicaleffects qt5-svg qt5-quickcontrols2
 
 BLUE "[*] Installing Discord..."
-su - $user -c "yay -S --answerdiff=None --noconfirm discord"
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed discord"
 
-BLUE "[*] Installing Fish..."
-su - $user -c "yay -S --answerdiff=None --noconfirm fish"
+BLUE "[*] Installing Zsh..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed zsh"
 
 BLUE "[*] Installing Neovim..."
-su - $user -c "yay -S --answerdiff=None --noconfirm neovim"
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed neovim"
 
 BLUE "[*] Installing Spotify..."
-su - $user -c "yay -S --answerdiff=None --noconfirm spotifyd 
-su - $user -c "yay -S --answerdiff=None --noconfirm spotify-tui
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed spotifyd" 
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed spotify-tui"
+
+BLUE "[*] Installing Alacritty..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed alacritty"
+
+BLUE "[*] Installing Plymouth..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed plymouth-git"
+plymouth_search="HOOKS=(base udev"
+line_num=$(grep -n "HOOKS=(base udev" /etc/mkinitcpio.conf | awk 'END {print $1}' | cut -d: -f1)
+sed -i "$line_num"'s/$plymouth_search/$plymouth_search plymouth/' /etc/mkinitcpio.conf
+sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\(.*\)/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"/'
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed plymouth-theme-flame-git"
+plymouth-set-default-theme -R flame
 
 
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){
-        # Bash dotfiles
+        # Hypr dotfiles
 	su - $user -c "mkdir /home/$user/.config; mkdir /home/$user/.config/hypr"
-	su - $user -c "cp -r ./arch-ignition-key/dotfiles/hypr /home/$user/.config/hypr"
-	su - $user -c "cp -r ./arch-ignition-key/dotfiles/sddm/themes /usr/share/sddm"
-	su - $user -c "cp ./arch-ignition-key/dotfiles/sddm/sddm.conf /etc/sddm.conf"
-	su - $user -c "mkdir /home/$user/Pictures"
-	su - $user -c "cp -r ./arch-ignition-key/wallpapers /home/$user/Pictures"
-	su - $user -c "cp -r ./arch-ignition-key/dotfiles/kitty /home/$user/.config/kitty"
-	cp -r /home/$user/arch-ignition-key/dotfiles/grub/themes/sleek /usr/share/grub/themes/sleek
+	cp -r ./arch-ignition-key/dotfiles/hypr /home/$user/.config/
 	echo -e "preload = /home/$user/Pictures/nezuko.jpg\nwallpaper = eDP-1,/home/$user/Pictures/nezuko.jpg"
+
+	# Sddm dotfiles
+	cp -r ./arch-ignition-key/dotfiles/sddm/themes /usr/share/sddm
+	cp ./arch-ignition-key/dotfiles/sddm/sddm.conf /etc/sddm.conf
+	su - $user -c "mkdir /home/$user/Pictures"
+	cp -r ./arch-ignition-key/wallpapers /home/$user/Pictures
+
+	# Kitty dotfiles
+	cp -r ./arch-ignition-key/dotfiles/kitty /home/$user/.config/
+	
+	# Grub dotfiles
+	cp -r /home/$user/arch-ignition-key/dotfiles/grub/themes/sleek /usr/share/grub/themes
+	cp /home/$user/arch-ignition-key/dotfiles/grub/grub /etc/default/
+
+	# Discord/discocss dotfiles
 	git clone https://github.com/mlvzk/discocss
 	cp discocss/discocss /usr/bin
+	rm -rf discocss
 	su - $user -c "mkdir /home/$user/.config/discocss"
-	curl -L https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css > ~/.config/discocss/custom.css
-	discocss
+	curl -L https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css > /home/$user/.config/discocss/custom.css
+
+	# Firefox dotfiles
+	git clone https://github.com/PROxZIMA/prism
+	chown -R $user:$user prism
+	cp -r prism /home/$user/.mozilla/firefox/
+	rm -rf prism
+	cp /home/$user/arch-ignition-key/dotfiles/firefox/mozilla.cfg /usr/lib/firefox/
+	cp /home/$user/arch-ignition-key/dotfiles/firefox/local-settings.js /usr/lib/firefox/defaults/pref/
+
+	# Alacritty dotfiles
+	mkdir /home/$user/.config/alacritty
+	cp /home/$user/arch-ignition-key/dotfiles/alacritty/alacritty.yml /home/$user/.config/alacritty
+	git clone https://github.com/catppuccin/alacrity.git /home/$user/.config/alacritty/catppuccin
+
+	# Ownership
+	chown -R $user:$user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek
 }
 
 BLUE "   Would you like to copy modified dotfiles?"
@@ -97,5 +138,8 @@ case $userinput in
         n|N) BLUE "[*] Keeping defaults..." ;;
         *) RED "[!] Invalid response, keeping defaults...";;
 esac
+
+# Remove changes to /etc/sudoers
+sed -i '$ d' /etc/sudoers
 
 GREEN "[++] All done! Remember to reboot and login again to see the full changes!"

@@ -1,9 +1,11 @@
 lua require('plugins')
 
+let g:coq_settings = { 'auto_start': 'shut-up' }
 scriptencoding utf-8
 
 colorscheme catppuccin-mocha
 
+set formatoptions-=cro
 set timeoutlen=500
 set updatetime=500
 if !empty(provider#clipboard#Executable())
@@ -13,7 +15,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》
+set matchpairs+=<:>,[:],{:},“:”,‘:’,(:)
 set number
 set ignorecase smartcase
 set linebreak
@@ -36,10 +38,6 @@ syntax on
 set mouse=a
 set clipboard=unnamedplus
 set ttyfast
-
-call plug#begin('~/.config/nvim/plugged')
-  Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-call plug#end()
 
 augroup packer_user_config
   autocmd!

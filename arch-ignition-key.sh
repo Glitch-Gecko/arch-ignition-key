@@ -1,6 +1,7 @@
 #!/bin/bash
-
+# Arch install script by Ainchentmew2
 # Credit to John Hammond for base script and colors
+
 # Define colors...
 RED=`tput bold && tput setaf 1`
 GREEN=`tput bold && tput setaf 2`
@@ -66,13 +67,36 @@ su - $user -c "yay -S --answerdiff=None --noconfirm --needed discord"
 
 BLUE "[*] Installing Zsh..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed zsh"
+sudo sed -i "s/\/home\/$user:\/usr\/bin\/bash/\/home\/$user:\/usr\/bin\/zsh/" /etc/passwd
 
 BLUE "[*] Installing Neovim..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed neovim"
 
+BLUE "[*] Installing Neofetch..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed neofetch"
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed imagemagick"
+
+BLUE "[*] Installing Cowsay..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed cowsay"
+
+BLUE "[*] Installing Lolcat..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed lolcat"
+
 BLUE "[*] Installing Spotify..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed spotifyd" 
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed spotify-tui"
+
+BLUE "[*] Installing Alacritty..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed alacritty"
+
+BLUE "[*] Installing Waybar..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed waybar-hyprland"
+
+BLUE "[*] Installing Starship..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed starship"
+
+BLUE "[*] Installing Alacritty..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed alacritty"
 
 BLUE "[*] Installing Alacritty..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed alacritty"
@@ -86,6 +110,13 @@ sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\(.*\)/GRUB_CMDLINE_LINUX_DEFAULT="loglevel
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed plymouth-theme-flame-git"
 plymouth-set-default-theme -R flame
 
+sed -i "s/\/home\/$user/"
+
+BLUE "[*] Installing Nerd Hack Font..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed ttf-hack-nerd"
+
+BLUE "[*] Installing clipboard..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed wl-clipboard"
 
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){
@@ -127,8 +158,17 @@ function dotfiles(){
 	cp /home/$user/arch-ignition-key/dotfiles/alacritty/alacritty.yml /home/$user/.config/alacritty
 	git clone https://github.com/catppuccin/alacrity.git /home/$user/.config/alacritty/catppuccin
 
+	# Nvim dotfiles
+	cp -r /home/$user/arch-ignition-key/dotfiles/nvim/ /home/$user/.config/
+
+	# Tmux dotfiles
+	cp -r /home/$user/arch-ignition-key/dotfiles/tmux/ /home/$user/.config/
+
+	# Zsh dotfiles
+	cp /home/$user/arch-ignition-key/dotfiles/zsh/.zshrc /home/$user/
+
 	# Ownership
-	chown -R $user:$user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek
+	chown -R $user:$user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek /home/$user/.zshrc
 }
 
 BLUE "   Would you like to copy modified dotfiles?"

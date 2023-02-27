@@ -124,7 +124,7 @@ function dotfiles(){
         # Hypr dotfiles
 	su - $user -c "mkdir /home/$user/.config; mkdir /home/$user/.config/hypr"
 	cp -r ./arch-ignition-key/dotfiles/hypr /home/$user/.config/
-	echo -e "preload = /home/$user/Pictures/nezuko.jpg\nwallpaper = eDP-1,/home/$user/Pictures/nezuko.jpg"
+	echo -e "preload = /home/$user/Pictures/wallpapers/nezuko.jpg\nwallpaper = eDP-1,/home/$user/Pictures/wallpapers/nezuko.jpg"
 
 	# Sddm dotfiles
 	cp -r ./arch-ignition-key/dotfiles/sddm/themes /usr/share/sddm

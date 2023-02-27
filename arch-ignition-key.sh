@@ -95,8 +95,9 @@ su - $user -c "yay -S --answerdiff=None --noconfirm --needed waybar-hyprland"
 BLUE "[*] Installing Starship..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed starship"
 
-BLUE "[*] Installing Alacritty..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed alacritty"
+BLUE "[*] Installing Light..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed light"
+echo 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"' > /etc/udev/rules.d/backlight.rules
 
 BLUE "[*] Installing Alacritty..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed alacritty"

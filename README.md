@@ -30,6 +30,7 @@ Startup animation   Plymouth
 ### Screenshots
 <img src="./assets/screenshot_1.png">
 <img src="./assets/screenshot_2.png">
+<img src="./assets/screenshot_4.png">
 <img src="./assets/screenshot_3.png">
 
 ---

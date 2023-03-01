@@ -85,6 +85,7 @@ su - $user -c "yay -S --answerdiff=None --noconfirm --needed lolcat"
 BLUE "[*] Installing Spotify..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed spotifyd" 
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed spotify-tui"
+su - $user -c "systemctl --user enable spotifyd.service"
 
 BLUE "[*] Installing Alacritty..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed alacritty"
@@ -111,7 +112,14 @@ sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\(.*\)/GRUB_CMDLINE_LINUX_DEFAULT="loglevel
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed plymouth-theme-flame-git"
 plymouth-set-default-theme -R flame
 
-sed -i "s/\/home\/$user/"
+BLUE "[*] Installing Pulse Audio..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed pulseaudio-alsa"
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed sof-firmware"
+su - $user -c "systemctl --user enable pulseaudio"
+
+BLUE "[*] Installing Bluetooth..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed bluez-utils"
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed bluez"
 
 BLUE "[*] Installing Nerd Hack Font..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed ttf-hack-nerd"
@@ -121,7 +129,7 @@ su - $user -c "yay -S --answerdiff=None --noconfirm --needed wl-clipboard"
 
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){
-        # Hypr dotfiles
+    # Hypr dotfiles
 	su - $user -c "mkdir /home/$user/.config; mkdir /home/$user/.config/hypr"
 	cp -r ./arch-ignition-key/dotfiles/hypr /home/$user/.config/
 	echo -e "preload = /home/$user/Pictures/wallpapers/nezuko.jpg\nwallpaper = eDP-1,/home/$user/Pictures/wallpapers/nezuko.jpg"
@@ -173,6 +181,9 @@ function dotfiles(){
 
     # Starship dotfiles
     cp /home/$user/arch-ignition-key/dotfiles/starship.toml /home/$user/.config/starship.toml
+
+    # Spotifyd dotfiles
+    cp -r /home/$user/arch-ignition-key/dotfiles/systemd /home/$user/.config/
 
 	# Ownership
 	chown -R $user:$user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek /home/$user/.zshrc

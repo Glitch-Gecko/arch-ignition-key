@@ -62,6 +62,9 @@ BLUE "[*] Installing SDDM..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed sddm-git"
 pacman -Syu --noconfirm --needed qt5-graphicaleffects qt5-svg qt5-quickcontrols2
 
+BLUE "[*] Installing tree..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed tree"
+
 BLUE "[*] Installing Discord..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed discord"
 

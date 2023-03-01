@@ -26,6 +26,6 @@ alias lla='la | lolcat'
 alias lll='ll | lolcat'
 alias lfetch='fetch | lolcat'
 alias ltree='tree | lolcat'
-alias latree='tree | lolcat -as 1'
+alias latree='tree | lolcat -ad 1'
 fortune | cowsay -f stegosaurus | lolcat
 eval "$(starship init zsh)"

@@ -49,4 +49,5 @@ sudo ./arch-ignition-key.sh
 ### Credits
 
 [r/unixporn](https://www.reddit.com/r/unixporn)
+
 [Arch wiki](https://wiki.archlinux.org)

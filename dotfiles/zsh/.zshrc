@@ -21,8 +21,11 @@ alias sudo='sudo '
 alias fetch='neofetch --kitty'
 alias la='ls -la'
 alias ll='ls -l'
+alias lls='ls | lolcat'
 alias lla='la | lolcat'
 alias lll='ll | lolcat'
 alias lfetch='fetch | lolcat'
+alias ltree='tree | lolcat'
+alias latree='tree | lolcat -as 1'
 fortune | cowsay -f stegosaurus | lolcat
 eval "$(starship init zsh)"

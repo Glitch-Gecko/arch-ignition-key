@@ -22,8 +22,9 @@ Chat                Discord
 Music               Spotify-tui
 Fetch               Neofetch
 Lockscreen          Sddm
-Lockscreen theme    Sugar Candy
+SDDM theme          Sugar Candy
 Boot loader         Grub
+Grub theme          Sleek
 Startup animation   Plymouth
 ```
 

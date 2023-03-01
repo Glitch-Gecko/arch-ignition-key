@@ -1,6 +1,6 @@
 
 <div align="center">
-# Arch Ignition Key
+## Arch Ignition Key
 
 Scripts and dotfiles to automate the setup of a fresh Arch Linux install easily, with my custom configuration
 

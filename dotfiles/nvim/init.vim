@@ -5,7 +5,7 @@ scriptencoding utf-8
 
 colorscheme catppuccin-mocha
 
-set formatoptions-=cro
+au FileType * setlocal formatoptions-=cro
 set timeoutlen=500
 set updatetime=500
 if !empty(provider#clipboard#Executable())
@@ -16,6 +16,7 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set matchpairs+=<:>,[:],{:},“:”,‘:’,(:)
+set formatoptions-=cro
 set number
 set ignorecase smartcase
 set linebreak

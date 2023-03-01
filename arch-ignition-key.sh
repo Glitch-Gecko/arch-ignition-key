@@ -168,6 +168,12 @@ function dotfiles(){
 	# Zsh dotfiles
 	cp /home/$user/arch-ignition-key/dotfiles/zsh/.zshrc /home/$user/
 
+    # Neofetch dotfiles
+    cp -r /home/$user/arch-ignition-key/dotfiles/neofetch /home/$user/.config/
+
+    # Starship dotfiles
+    cp /home/$user/arch-ignition-key/dotfiles/starship.toml /home/$user/.config/starship.toml
+
 	# Ownership
 	chown -R $user:$user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek /home/$user/.zshrc
 }

@@ -62,6 +62,10 @@ su - $user -c "yay -S --answerdiff=None --noconfirm --needed hyprpaper-git"
 BLUE "[*] Installing SDDM..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed sddm-git"
 pacman -Syu --noconfirm --needed qt5-graphicaleffects qt5-svg qt5-quickcontrols2
+systemctl enable sddm
+
+BLUE "[*] Installing Firefox..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed firefox"
 
 BLUE "[*] Installing tree..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed tree"
@@ -72,13 +76,18 @@ su - $user -c "yay -S --answerdiff=None --noconfirm --needed discord"
 BLUE "[*] Installing Zsh..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed zsh"
 sudo sed -i "s/\/home\/$user:\/usr\/bin\/bash/\/home\/$user:\/usr\/bin\/zsh/" /etc/passwd
+chsh -s /bin/zsh $user
 
 BLUE "[*] Installing Neovim..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed neovim"
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed nvim-packer-git"
 
 BLUE "[*] Installing Neofetch..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed neofetch"
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed imagemagick"
+
+BLUE "[*] Installing Fortune..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed fortune-mod"
 
 BLUE "[*] Installing Cowsay..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed cowsay"
@@ -169,7 +178,7 @@ function dotfiles(){
 	# Alacritty dotfiles
 	mkdir /home/$user/.config/alacritty
 	cp $SCRIPT_DIR/dotfiles/alacritty/alacritty.yml /home/$user/.config/alacritty
-	git clone https://github.com/catppuccin/alacrity.git /home/$user/.config/alacritty/catppuccin
+	su - $user -c "git clone https://github.com/catppuccin/alacrity.git ~/.config/alacritty/catppuccin"
 
 	# Nvim dotfiles
 	cp -r $SCRIPT_DIR/dotfiles/nvim/ /home/$user/.config/

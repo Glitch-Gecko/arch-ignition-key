@@ -159,6 +159,7 @@ function dotfiles(){
 	# Grub dotfiles
 	cp -r $SCRIPT_DIR/dotfiles/grub/themes/sleek /usr/share/grub/themes
 	cp $SCRIPT_DIR/dotfiles/grub/grub /etc/default/
+    grub-mkconfig -o /boot/grub/grub.cfg
 
 	# Discord/discocss dotfiles
 	git clone https://github.com/mlvzk/discocss

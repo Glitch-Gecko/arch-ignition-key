@@ -9,6 +9,7 @@ YELLOW=`tput bold && tput setaf 3`
 BLUE=`tput bold && tput setaf 4`
 NC=`tput sgr0`
 user=$(who | awk 'NR==1{print $1}')
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "${0%/*}"
 
 function RED(){
@@ -138,17 +139,17 @@ function dotfiles(){
 	echo -e "preload = /home/$user/Pictures/wallpapers/nezuko.jpg\nwallpaper = eDP-1,/home/$user/Pictures/wallpapers/nezuko.jpg"
 
 	# Sddm dotfiles
-	cp -r ./arch-ignition-key/dotfiles/sddm/themes /usr/share/sddm
-	cp ./arch-ignition-key/dotfiles/sddm/sddm.conf /etc/sddm.conf
+	cp -r $SCRIPT_DIR/dotfiles/sddm/themes /usr/share/sddm
+	cp $SCRIPT_DIR/dotfiles/sddm/sddm.conf /etc/sddm.conf
 	su - $user -c "mkdir /home/$user/Pictures"
-	cp -r ./arch-ignition-key/wallpapers /home/$user/Pictures
+	cp -r $SCRIPT_DIR/wallpapers /home/$user/Pictures
 
 	# Kitty dotfiles
-	cp -r ./arch-ignition-key/dotfiles/kitty /home/$user/.config/
+	cp -r $SCRIPT_DIR/dotfiles/kitty /home/$user/.config/
 	
 	# Grub dotfiles
-	cp -r /home/$user/arch-ignition-key/dotfiles/grub/themes/sleek /usr/share/grub/themes
-	cp /home/$user/arch-ignition-key/dotfiles/grub/grub /etc/default/
+	cp -r $SCRIPT_DIR/dotfiles/grub/themes/sleek /usr/share/grub/themes
+	cp $SCRIPT_DIR/dotfiles/grub/grub /etc/default/
 
 	# Discord/discocss dotfiles
 	git clone https://github.com/mlvzk/discocss
@@ -162,31 +163,31 @@ function dotfiles(){
 	chown -R $user:$user prism
 	cp -r prism /home/$user/.mozilla/firefox/
 	rm -rf prism
-	cp /home/$user/arch-ignition-key/dotfiles/firefox/mozilla.cfg /usr/lib/firefox/
-	cp /home/$user/arch-ignition-key/dotfiles/firefox/local-settings.js /usr/lib/firefox/defaults/pref/
+	cp $SCRIPT_DIR/dotfiles/firefox/mozilla.cfg /usr/lib/firefox/
+	cp $SCRIPT_DIR/dotfiles/firefox/local-settings.js /usr/lib/firefox/defaults/pref/
 
 	# Alacritty dotfiles
 	mkdir /home/$user/.config/alacritty
-	cp /home/$user/arch-ignition-key/dotfiles/alacritty/alacritty.yml /home/$user/.config/alacritty
+	cp $SCRIPT_DIR/dotfiles/alacritty/alacritty.yml /home/$user/.config/alacritty
 	git clone https://github.com/catppuccin/alacrity.git /home/$user/.config/alacritty/catppuccin
 
 	# Nvim dotfiles
-	cp -r /home/$user/arch-ignition-key/dotfiles/nvim/ /home/$user/.config/
+	cp -r $SCRIPT_DIR/dotfiles/nvim/ /home/$user/.config/
 
 	# Tmux dotfiles
-	cp -r /home/$user/arch-ignition-key/dotfiles/tmux/ /home/$user/.config/
+	cp -r $SCRIPT_DIR/dotfiles/tmux/ /home/$user/.config/
 
 	# Zsh dotfiles
-	cp /home/$user/arch-ignition-key/dotfiles/zsh/.zshrc /home/$user/
+	cp $SCRIPT_DIR/dotfiles/zsh/.zshrc /home/$user/
 
     # Neofetch dotfiles
-    cp -r /home/$user/arch-ignition-key/dotfiles/neofetch /home/$user/.config/
+    cp -r $SCRIPT_DIR/dotfiles/neofetch /home/$user/.config/
 
     # Starship dotfiles
-    cp /home/$user/arch-ignition-key/dotfiles/starship.toml /home/$user/.config/starship.toml
+    cp $SCRIPT_DIR/dotfiles/starship.toml /home/$user/.config/starship.toml
 
     # Spotifyd dotfiles
-    cp -r /home/$user/arch-ignition-key/dotfiles/systemd /home/$user/.config/
+    cp -r $SCRIPT_DIR/dotfiles/systemd /home/$user/.config/
 
 	# Ownership
 	chown -R $user:$user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek /home/$user/.zshrc

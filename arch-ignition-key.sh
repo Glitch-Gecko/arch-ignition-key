@@ -35,7 +35,7 @@ fi
 # Allow nopassword sudo usage for this script
 echo "$user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-chown -R $user:$user /home/$user/arch-ignition-key
+chown -R $user /home/$user/arch-ignition-key
 
 BLUE "   Would you like to install intel graphics drivers?"
 read -n1 -p "   Please type Y or N : " userinput
@@ -160,7 +160,7 @@ function dotfiles(){
 
 	# Firefox dotfiles
 	git clone https://github.com/PROxZIMA/prism
-	chown -R $user:$user prism
+	chown -R $user prism
 	cp -r prism /home/$user/.mozilla/firefox/
 	rm -rf prism
 	cp $SCRIPT_DIR/dotfiles/firefox/mozilla.cfg /usr/lib/firefox/
@@ -190,7 +190,7 @@ function dotfiles(){
     cp -r $SCRIPT_DIR/dotfiles/systemd /home/$user/.config/
 
 	# Ownership
-	chown -R $user:$user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek /home/$user/.zshrc
+	chown -R $user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek /home/$user/.zshrc
 }
 
 BLUE "   Would you like to copy modified dotfiles?"

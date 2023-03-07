@@ -27,5 +27,14 @@ alias lll='ll | lolcat'
 alias lfetch='fetch | lolcat'
 alias ltree='tree | lolcat'
 alias latree='tree | lolcat -ad 1'
+alias myip="curl http://ipecho.net/plain; echo"
+
+
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+
+
 fortune | cowsay -f stegosaurus | lolcat
 eval "$(starship init zsh)"

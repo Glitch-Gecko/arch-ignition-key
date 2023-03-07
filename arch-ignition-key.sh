@@ -174,9 +174,6 @@ function dotfiles(){
 	# Nvim dotfiles
 	cp -r $SCRIPT_DIR/dotfiles/nvim/ /home/$user/.config/
 
-	# Tmux dotfiles
-	cp -r $SCRIPT_DIR/dotfiles/tmux/ /home/$user/.config/
-
 	# Zsh dotfiles
 	cp $SCRIPT_DIR/dotfiles/zsh/.zshrc /home/$user/
 

@@ -135,7 +135,7 @@ su - $user -c "yay -S --answerdiff=None --noconfirm --needed wl-clipboard"
 function dotfiles(){
     # Hypr dotfiles
 	su - $user -c "mkdir /home/$user/.config; mkdir /home/$user/.config/hypr"
-	cp -r ./arch-ignition-key/dotfiles/hypr /home/$user/.config/
+	cp -r $SCRIPT_DIR/dotfiles/hypr /home/$user/.config/
 	echo -e "preload = /home/$user/Pictures/wallpapers/nezuko.jpg\nwallpaper = eDP-1,/home/$user/Pictures/wallpapers/nezuko.jpg"
 
 	# Sddm dotfiles

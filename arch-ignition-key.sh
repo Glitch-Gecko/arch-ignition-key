@@ -59,6 +59,9 @@ su - $user -c "yay -S --answerdiff=None --noconfirm --needed hyprland"
 BLUE "[*] Installing Hyprpaper..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed hyprpaper-git"
 
+BLUE "[*] Installing Nm-applet..."
+su - $user -c "yay -S --answerdiff=None --noconfirm --needed network-manager-applet"
+
 BLUE "[*] Installing SDDM..."
 su - $user -c "yay -S --answerdiff=None --noconfirm --needed sddm-git"
 pacman -Syu --noconfirm --needed qt5-graphicaleffects qt5-svg qt5-quickcontrols2

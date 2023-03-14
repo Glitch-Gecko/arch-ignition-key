@@ -33,6 +33,10 @@ Startup animation   Plymouth
 <img src="./assets/screenshot_2.png">
 <img src="./assets/screenshot_4.png">
 <img src="./assets/screenshot_3.png">
+<img src="./assets/screenshot_5.png">
+<img src="./assets/screenshot_6.png">
+<img src="./assets/screenshot_7.png">
+<img src="./assets/screenshot_8.png">
 
 ---
 

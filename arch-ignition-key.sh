@@ -41,125 +41,120 @@ fi
 # Allow nopassword sudo usage for this script
 echo "$user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+# Grant ownership to user
 chown -R $user /home/$user/arch-ignition-key
 
-BLUE "   Would you like to install intel graphics drivers?"
-read -n1 -p "   Please type Y or N : " userinput
-case $userinput in
-        y|Y) BLUE "[*] Installing mesa..."; pacman -S --noconfirm mesa;;
-        n|N) BLUE "[*] Not installing..." ;;
-        *) RED "[!] Invalid response, not installing...";;
-esac
+# Check if yay installed, install yay
+if ! type "yay" > /dev/null; then
+    BLUE "[*] Installing yay..."
+    pacman -S --needed git base-devel --noconfirm
+    su - $user -c "git clone https://aur.archlinux.org/yay.git"
+    su - $user -c "cd yay; makepkg -si"
+    rm -rf yay
+fi
 
-BLUE "[*] Installing yay..."
-pacman -S --needed git base-devel --noconfirm --needed
-su - $user -c "git clone https://aur.archlinux.org/yay.git"
-su - $user -c "cd yay; makepkg -si"
+# Function to handle package installation
+function install_packages() {
+    for package in "${@}"; do
+        if ! pacman -Qq "$package" &> /dev/null; then
+            BLUE "[*] Installing $package..."
+            su - $user -c "yay -S --answerdiff=None --noconfirm --needed $package"
+        else
+            GREEN "[*] ${package} is already installed."
+        fi
+    done
+}
 
-BLUE "[*] Installing kitty..."
-pacman -S --noconfirm --needed kitty
+# Function to handle user prompts
+function ask_for_packages() {
+    local package_group_name=$1
+    local package_group=("${!2}")
+    local dependencies=("${!3}")
 
-BLUE "[*] Installing Hyprland..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed hyprland"
+    YELLOW "[*] Would you like to install ${package_group_name} packages?"
+    echo "${package_group[*]}"
+    read -n1 -p "Please type Y or N: " user_choice
+    case $user_choice in
+        y|Y)
+            packages+=("${package_group[@]}")
+            packages+=("${dependencies[@]}")
+            ;;
+        n|N)
+            Blue "[*] Not installing ${package_group_name} packages."
+            ;;
+        *)
+            RED "[!] Invalid response, not installing...";;
+    esac
+}
 
-BLUE "[*] Installing Hyprpaper..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed hyprpaper-git"
+# Package groups
+drivers=("mesa")
 
-BLUE "[*] Installing Nm-applet..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed network-manager-applet"
+display_packages=("hyprland" "swww" "sddm-git" "kitty" "alacritty" "waybar-hyprland" "plymouth-git" "light")
+display_dependencies=("qt5-graphicaleffects" "qt5-svg" "qt5-quickcontrols2" "plymouth-theme-flame-git")
 
-BLUE "[*] Installing SDDM..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed sddm-git"
-pacman -Syu --noconfirm --needed qt5-graphicaleffects qt5-svg qt5-quickcontrols2
+shell_packages=("zsh" "neovim" "starship" "tree" "ttf-hack-nerd" "noto-fonts" "noto-fonts-emoji")
+shell_dependencies=("nvim-packer-git")
+
+misc_packages=("neofetch" "fortune-mod" "cowsay" "lolcat" "tty-clock-git")
+misc_dependencies=("imagemagick")
+
+application_packages=("firefox" "discord" "spotify-tui" "obsidian-appimage" "p7zip")
+application_dependencies=("spotify-tui")
+
+firmware_packages=("bluez" "pulseaudio-alsa" "wl-clipboard" "network-manager-applet" "grim" "pavucontrol" "slurp" "xbindkeys")
+firmware_dependencies=("sof-firmware" "bluez-utils" "pulseaudio-bluetooth")
+
+packages=()
+ask_for_packages "intel drivers" drivers[@]
+echo
+ask_for_packages "display" display_packages[@] display_dependencies[@]
+echo
+ask_for_packages "shell" shell_packages[@] shell_dependencies[@]
+echo
+ask_for_packages "misc" misc_packages[@] misc_dependencies[@]
+echo
+ask_for_packages "application" application_packages[@] application_dependencies[@]
+echo
+ask_for_packages "firmware_packages" firmware_packages[@] firmware_dependencies[@]
+echo
+
+install_packages "${packages[@]}"
+
 systemctl enable sddm
 
-BLUE "[*] Installing Firefox..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed firefox"
-
-BLUE "[*] Installing tree..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed tree"
-
-BLUE "[*] Installing Discord..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed discord"
-
-BLUE "[*] Installing Zsh..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed zsh"
+BLUE "[*] Changing shell to Zsh..."
 sudo sed -i "s/\/home\/$user:\/usr\/bin\/bash/\/home\/$user:\/usr\/bin\/zsh/" /etc/passwd
 chsh -s /bin/zsh $user
 
-BLUE "[*] Installing Neovim..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed neovim"
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed nvim-packer-git"
-
-BLUE "[*] Installing Neofetch..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed neofetch"
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed imagemagick"
-
-BLUE "[*] Installing Fortune..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed fortune-mod"
-
-BLUE "[*] Installing Cowsay..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed cowsay"
-
-BLUE "[*] Installing Lolcat..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed lolcat"
-
-BLUE "[*] Installing Spotify..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed spotifyd" 
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed spotify-tui"
+BLUE "[*] Setting up Spotify..."
 su - $user -c "systemctl --user enable spotifyd.service"
 
-BLUE "[*] Installing Alacritty..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed alacritty"
-
-BLUE "[*] Installing Waybar..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed waybar-hyprland"
-
-BLUE "[*] Installing Starship..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed starship"
-
-BLUE "[*] Installing Light..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed light"
+BLUE "[*] Setting up Light..."
 echo 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"' > /etc/udev/rules.d/backlight.rules
 
-BLUE "[*] Installing Alacritty..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed alacritty"
-
-BLUE "[*] Installing Plymouth..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed plymouth-git"
+BLUE "[*] Setting up Plymouth..."
 plymouth_search="HOOKS=(base udev"
 line_num=$(grep -n "HOOKS=(base udev" /etc/mkinitcpio.conf | awk 'END {print $1}' | cut -d: -f1)
 sed -i "$line_num"'s/$plymouth_search/$plymouth_search plymouth/' /etc/mkinitcpio.conf
 sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\(.*\)/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"/'
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed plymouth-theme-flame-git"
 plymouth-set-default-theme -R flame
 
-BLUE "[*] Installing Pulse Audio..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed pulseaudio-alsa"
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed sof-firmware"
+BLUE "[*] Enabling Pulse Audio..."
 su - $user -c "systemctl --user enable pulseaudio"
-
-BLUE "[*] Installing Bluetooth..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed bluez-utils"
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed bluez"
-
-BLUE "[*] Installing Nerd Hack Font..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed ttf-hack-nerd"
-
-BLUE "[*] Installing clipboard..."
-su - $user -c "yay -S --answerdiff=None --noconfirm --needed wl-clipboard"
 
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){
     # Hypr dotfiles
 	su - $user -c "mkdir /home/$user/.config; mkdir /home/$user/.config/hypr"
 	cp -r $SCRIPT_DIR/dotfiles/hypr /home/$user/.config/
-	echo -e "preload = /home/$user/Pictures/wallpapers/nezuko.jpg\nwallpaper = eDP-1,/home/$user/Pictures/wallpapers/nezuko.jpg"
 
 	# Sddm dotfiles
 	cp -r $SCRIPT_DIR/dotfiles/sddm/themes /usr/share/sddm
 	cp $SCRIPT_DIR/dotfiles/sddm/sddm.conf /etc/sddm.conf
 	su - $user -c "mkdir /home/$user/Pictures"
+
+    # Copy wallpapers
 	cp -r $SCRIPT_DIR/wallpapers /home/$user/Pictures
 
 	# Kitty dotfiles

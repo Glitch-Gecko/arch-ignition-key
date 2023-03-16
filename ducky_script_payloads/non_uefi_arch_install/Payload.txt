@@ -1,0 +1,63 @@
+REM This is an arch linux install script, made by GlitchGecko
+REM It's very simple. Plug in the rubber ducky and follow instructions
+REM Make sure to create partitions, connect to wifi, and update pacman first
+REM After the root partition is mounted to /mnt, this script can be executed
+
+DELAY 3000
+STRINGLN echo -e "\n\n ##################################\n ##################################\n\t\tCHECKLIST\n1. Check EFI support (done above)\n2. Connect with iwctl\n\t2a. device list\n\t2b. station [device] scan\n\t2c. station [device] get-networks\n\t2d. station [device] connect [network]\n\t2e. check connection (done below)\n3. Update with pacman -Syy\n4. Partition filesystem (single partition), type linux.\n\t4a. mkfs.ext4 [partition]\n\n\t\tEnjoy! \n ##################################\n ##################################\n\n" > checklist
+STRINGLN cat /sys/firmware/efi/efivars
+STRINGLN ping -c 1 -s 8 -w 1 google.com
+STRINGLN cat checklist
+STRINGLN echo -e "\n\n\t--------------------------\nPress button after checklist is completed.\n\t--------------------------\n\n"
+WAIT_FOR_BUTTON_PRESS
+STRINGLN echo -e "\n\n--------------------------\nMount partition on /mnt (mount /dev/[drive] /mnt) and press button to continue:\n--------------------------\n\n"
+DELAY 100
+STRING mount /dev/
+WAIT_FOR_BUTTON_PRESS
+ENTER
+STRINGLN pacman -Sy --noconfirm archlinux-keyring
+STRINGLN pacman-key --populate archlinux
+STRINGLN pacstrap /mnt base base-devel linux linux-firmware vim
+STRINGLN genfstab -U /mnt >> /mnt/etc/fstab
+STRINGLN arch-chroot /mnt
+STRINGLN locale_var="en_US.UTF-8 UTF-8"; sed -i "/^#$locale_var/ c$locale_var" /etc/locale.gen
+STRINGLN locale-gen
+STRINGLN echo LANG=en_US.UTF-8 > /etc/locale.conf
+STRINGLN export LANG=en_US.UTF-8
+STRINGLN echo archlinux > /etc/hostname
+STRINGLN touch /etc/hosts
+STRINGLN echo -e "127.0.0.1\tlocalhost" > /etc/hosts
+STRINGLN echo -e "::1\tlocalhost" >> /etc/hosts
+STRINGLN echo -e "127.0.1.1\tarchlinux" >> /etc/hosts
+STRINGLN pacman -Sy --noconfirm grub
+STRINGLN grub-install /dev/sda
+STRINGLN grub-mkconfig -o /boot/grub/grub.cfg
+STRINGLN echo -e "\n\n\t--------------------------\nEnter a root password, then press button to continue:\n\t--------------------------\n\n"
+DELAY 100
+STRINGLN echo "Enter root password (not echoed):"; read -s root_password
+WAIT_FOR_BUTTON_PRESS
+ENTER
+STRINGLN echo -e "\n\n\t--------------------------\nEnter a username for a new user, then press button to continue:\n\t--------------------------\n\n"
+DELAY 100
+STRINGLN echo "Enter username:"; read new_user
+WAIT_FOR_BUTTON_PRESS
+ENTER
+STRINGLN echo -e "\n\n\t--------------------------\nEnter a password for $new_user, then press button to continue:\n\t--------------------------\n\n"
+DELAY 100
+STRINGLN echo "Enter $new_user's password (not echoed):"; read -s user_password
+WAIT_FOR_BUTTON_PRESS
+ENTER
+STRINGLN echo "root:$root_password" | chpasswd
+STRINGLN useradd -m $new_user
+STRINGLN echo "$new_user:$user_password" | chpasswd
+STRINGLN pacman -Sy --noconfirm sudo
+STRINGLN usermod -aG wheel,audio,video,storage,vboxusers $new_user
+STRINGLN wheel_var="%wheel ALL=(ALL:ALL) ALL"; sed -i "/^# $wheel_var/ c$wheel_var" /etc/sudoers
+STRINGLN pacman -Sy --noconfirm networkmanager git
+STRINGLN systemctl enable NetworkManager.service
+STRINGLN git clone https://github.com/Ainchentmew2/arch-ignition-key /home/$new_user/arch-ignition-key
+STRINGLN chown $new_user /home/$new_user/arch-ignition-key
+STRINGLN exit
+STRINGLN umount -l /mnt
+STRINGLN reboot
+ATTACKMODE STORAGE

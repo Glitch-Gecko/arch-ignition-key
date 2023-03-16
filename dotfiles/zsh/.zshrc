@@ -28,8 +28,11 @@ alias lfetch='fetch | lolcat'
 alias ltree='tree | lolcat'
 alias latree='tree | lolcat -ad 1'
 alias myip="curl http://ipecho.net/plain; echo"
+alias vbox="env QT_QPA_PLATFORM=xcb virtualbox"
 
-
+open() {
+    for file in $(printf '%s\n' "$@"); do xdg-open "$file"; done
+}
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word

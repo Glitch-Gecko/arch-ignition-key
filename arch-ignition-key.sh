@@ -1,6 +1,7 @@
 #!/bin/bash
 # Arch install script by Ainchentmew2
-# Credit to John Hammond for base script and colors
+# Credit to John Hammond for colors
+# Credit to An00bRektn for script idea
 
 # Define colors...
 RED=`tput bold && tput setaf 1`
@@ -8,10 +9,15 @@ GREEN=`tput bold && tput setaf 2`
 YELLOW=`tput bold && tput setaf 3`
 BLUE=`tput bold && tput setaf 4`
 NC=`tput sgr0`
+
+# Determining user who ran script`
 user=$(who | awk 'NR==1{print $1}')
+
+# Checking and changing script directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "${0%/*}"
 
+# Function for colors
 function RED(){
 	echo -e "\n${RED}${1}${NC}"
 }

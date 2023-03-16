@@ -21,4 +21,5 @@ return require('packer').startup(function(use)
 
     use {"ms-jpq/coq_nvim", branch = 'coq'}
     use {"ms-jpq/coq.artifacts", branch = 'artifacts'}
+    use "lambdalisue/suda.vim"
 end)

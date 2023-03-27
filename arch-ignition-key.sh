@@ -150,16 +150,16 @@ drivers=("mesa")
 display_packages=("hyprland" "swww" "sddm-git" "kitty" "alacritty" "waybar-hyprland" "plymouth-git" "light")
 display_dependencies=("qt5-graphicaleffects" "qt5-svg" "qt5-quickcontrols2" "plymouth-theme-flame-git")
 
-shell_packages=("zsh" "neovim" "starship" "tree" "ttf-hack-nerd" "noto-fonts" "noto-fonts-emoji")
-shell_dependencies=("nvim-packer-git")
+shell_packages=("zsh" "neovim" "starship" "tree" "ttf-hack-nerd" "noto-fonts" "noto-fonts-emoji" "man-db")
+shell_dependencies=("nvim-packer-git" "man-pages")
 
-misc_packages=("neofetch" "fortune-mod" "cowsay" "lolcat" "tty-clock-git")
+misc_packages=("neofetch" "fortune-mod" "cowsay" "lolcat" "tty-clock-git" "thefuck" "btop")
 misc_dependencies=("imagemagick")
 
 application_packages=("firefox" "discord" "spotify-tui" "obsidian-appimage" "p7zip")
 application_dependencies=("spotify-tui")
 
-firmware_packages=("bluez" "pulseaudio-alsa" "wl-clipboard" "network-manager-applet" "grim" "pavucontrol" "slurp" "xbindkeys")
+firmware_packages=("bluez" "pulseaudio-alsa" "wl-clipboard" "network-manager-applet" "grim" "pavucontrol" "slurp" "xbindkeys" "blueman")
 firmware_dependencies=("sof-firmware" "bluez-utils" "pulseaudio-bluetooth")
 
 packages=()

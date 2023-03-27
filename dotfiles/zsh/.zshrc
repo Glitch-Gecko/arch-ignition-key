@@ -19,7 +19,7 @@ alias grep='grep --color=auto'
 alias vi='nvim'
 alias sudo='sudo '
 alias fetch='neofetch --kitty'
-alias la='ls -la'
+alias la='ls -lA'
 alias ll='ls -l'
 alias lls='ls | lolcat'
 alias lla='la | lolcat'
@@ -29,6 +29,9 @@ alias ltree='tree | lolcat'
 alias latree='tree | lolcat -ad 1'
 alias myip="curl http://ipecho.net/plain; echo"
 alias vbox="env QT_QPA_PLATFORM=xcb virtualbox"
+alias sclear="clear; source ~/.zshrc"
+alias bth="sudo systemctl start bluetooth; nohup blueman-applet >/dev/null 2>&1 &"
+alias bat="bat --paging=never"
 
 open() {
     for file in $(printf '%s\n' "$@"); do xdg-open "$file"; done
@@ -41,3 +44,5 @@ bindkey "^[[1;5D" backward-word
 
 fortune | cowsay -f stegosaurus | lolcat
 eval "$(starship init zsh)"
+
+eval $(thefuck --alias)

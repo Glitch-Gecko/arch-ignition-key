@@ -10,6 +10,50 @@ YELLOW=`tput bold && tput setaf 3`
 BLUE=`tput bold && tput setaf 4`
 NC=`tput sgr0`
 
+usage() {
+  echo "Usage: $0 [-A] [-d] [--no-dots] [-y] [-Y] [--no-packages]" 1>&2;
+  exit 1;
+}
+
+# Get options from command line
+while getopts ":AdyY-:" opt; do
+  case $opt in
+    A )
+      APPLY_ALL="yes"
+      ;;
+    d )
+      APPLY_DOTFILES_PROMPT="yes"
+      ;;
+    y )
+      APPLY_PACKAGES="yes"
+      APPLY_DRIVER_PACKAGES="no"
+      ;;
+    Y )
+      APPLY_PACKAGES="yes"
+      APPLY_DRIVER_PACKAGES="yes"
+      ;;
+    - )
+      case "${OPTARG}" in
+        no-dots )
+          APPLY_DOTFILES_PROMPT="no"
+          ;;
+        no-packages )
+          APPLY_PACKAGES="no"
+          ;;
+        *)
+          usage
+          ;;
+      esac
+      ;;
+    \? )
+      usage
+      ;;
+    : )
+      usage
+      ;;
+  esac
+done
+
 # Determining user who ran script`
 user=$(who | awk 'NR==1{print $1}')
 
@@ -70,17 +114,30 @@ function ask_for_packages() {
     local package_group_name=$1
     local package_group=("${!2}")
     local dependencies=("${!3}")
-
-    YELLOW "[*] Would you like to install ${package_group_name} packages?"
-    echo "${package_group[*]}"
-    read -n1 -p "Please type Y or N: " user_choice
+    
+    if [[ $APPLY_ALL == "yes" ]]; then
+        packages+=("${package_group[@]}")
+        packages+=("${dependencies[@]}")
+    elif [[ $APPLY_PACKAGES == "yes" ]]; then
+        if [[ $package_group_name == "drivers" && $APPLY_DRIVER_PACKAGES == "no" ]]; then
+            user_choice="n"
+        else
+            user_choice="y"
+        fi
+    elif [[ $APPLY_PACKAGES == "no" ]]; then
+            user_choice="n"
+    else
+        YELLOW "[*] Would you like to install ${package_group_name} packages?"
+        echo "${package_group[*]}"
+        read -n1 -p "Please type Y or N: " user_choice
+    fi
     case $user_choice in
         y|Y)
             packages+=("${package_group[@]}")
             packages+=("${dependencies[@]}")
             ;;
         n|N)
-            Blue "[*] Not installing ${package_group_name} packages."
+            BLUE "[*] Not installing ${package_group_name} packages."
             ;;
         *)
             RED "[!] Invalid response, not installing...";;
@@ -119,7 +176,9 @@ echo
 ask_for_packages "firmware_packages" firmware_packages[@] firmware_dependencies[@]
 echo
 
-install_packages "${packages[@]}"
+if [[ ${#packages[@]} -gt 0 ]]; then
+    install_packages "${packages[@]}"
+fi
 
 systemctl enable sddm
 
@@ -173,44 +232,65 @@ function dotfiles(){
 	curl -L https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css > /home/$user/.config/discocss/custom.css
 
 	# Firefox dotfiles
+    BLUE "[*] Installing Firefox dotfiles..."
 	git clone https://github.com/PROxZIMA/prism
 	chown -R $user prism
 	cp -r prism /home/$user/.mozilla/firefox/
 	rm -rf prism
 	cp $SCRIPT_DIR/dotfiles/firefox/mozilla.cfg /usr/lib/firefox/
 	cp $SCRIPT_DIR/dotfiles/firefox/local-settings.js /usr/lib/firefox/defaults/pref/
+    #echo -e 'user_pref("browser.startup.homepage", "file:///home/$user/.mozilla/firefox/prism/index.html");' >> /home/$user/.mozilla/firefox/*.default*/prefs.js
 
 	# Alacritty dotfiles
+    BLUE "[*] Installing Alacritty dotfiles..."
 	mkdir /home/$user/.config/alacritty
 	cp $SCRIPT_DIR/dotfiles/alacritty/alacritty.yml /home/$user/.config/alacritty
 	su - $user -c "git clone https://github.com/catppuccin/alacrity.git ~/.config/alacritty/catppuccin"
 
 	# Nvim dotfiles
+    BLUE "[*] Installing Nvim dotfiles..."
 	cp -r $SCRIPT_DIR/dotfiles/nvim/ /home/$user/.config/
 
 	# Zsh dotfiles
+    BLUE "[*] Installing Zsh dotfiles..."
 	cp $SCRIPT_DIR/dotfiles/zsh/.zshrc /home/$user/
 
     # Neofetch dotfiles
+    BLUE "[*] Installing Neofetch dotfiles..."
     cp -r $SCRIPT_DIR/dotfiles/neofetch /home/$user/.config/
 
     # Starship dotfiles
+    BLUE "[*] Installing Starship dotfiles..."
     cp $SCRIPT_DIR/dotfiles/starship.toml /home/$user/.config/starship.toml
 
     # Spotifyd dotfiles
+    BLUE "[*] Installing Spotifyd dotfiles..."
     cp -r $SCRIPT_DIR/dotfiles/systemd /home/$user/.config/
 
+    # Waybar dotfiles
+    BLUE "[*] Installing Waybar dotfiles..."
+    cp -r $SCRIPT_DIR/dotfiles/waybar /home/$user/.config
+
+    # Btop dotfiles
+    BLUE "[*] Installing Btop dotfiles..."
+    cp -r $SCRIPT_DIR/dotfiles/btop /home/$user/.config
+
 	# Ownership
+    BLUE "[*] Granting ownership..."
 	chown -R $user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek /home/$user/.zshrc
 }
 
-BLUE "   Would you like to copy modified dotfiles?"
-read -n1 -p "   Please type Y or N : " userinput
-case $userinput in
-        y|Y) BLUE "[*] Copying dotfiles..."; dotfiles;;
-        n|N) BLUE "[*] Keeping defaults..." ;;
-        *) RED "[!] Invalid response, keeping defaults...";;
-esac
+if [[ $APPLY_DOTFILES_PROMPT == "yes" ]]; then
+    dotfiles;
+elif [[ $APPLY_DOTFILES_PROMPT != "no" ]]; then
+    BLUE "   Would you like to copy modified dotfiles?"
+    read -n1 -p "   Please type Y or N : " userinput
+    case $userinput in
+            y|Y) BLUE "[*] Copying dotfiles..."; dotfiles;;
+            n|N) BLUE "[*] Keeping defaults..." ;;
+            *) RED "[!] Invalid response, keeping defaults...";;
+    esac
+fi
 
 # Remove changes to /etc/sudoers
 sed -i '$ d' /etc/sudoers

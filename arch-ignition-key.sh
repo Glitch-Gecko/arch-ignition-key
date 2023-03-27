@@ -279,6 +279,10 @@ function dotfiles(){
     # Btop dotfiles
     BLUE "[*] Installing Btop dotfiles..."
     cp -r $SCRIPT_DIR/dotfiles/btop /home/$user/.config
+    
+    # Bat dotfiles
+    BLUE "[*] Installing Bat dotfiles..."
+    cp -r $SCRIPT_DIR/dotfiles/bat /home/$user/.config
 
 	# Ownership
     BLUE "[*] Granting ownership..."

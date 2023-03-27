@@ -53,13 +53,13 @@
     "cpu": {
         "format": " {usage}%",
         "tooltip": true,
-        "on-click": "kitty --title floating_kitty sh -c 'neofetch --kitty; read'",
+        "on-click": "btop",
         "interval": 2
     },
     "memory": {
         "format": " {}%",
         "tooltip": true,
-        "on-click": "kitty --title floating_kitty sh -c 'neofetch --kitty; read'",
+        "on-click": "btop",
         "interval": 2
     },
     "temperature": {
@@ -74,7 +74,7 @@
             ""
         ],
         "tooltip": true,
-        "on-click": "kitty --title floating_kitty sh -c 'neofetch --kitty; read'",
+        "on-click": "btop",
         "interval": 2
     },
     "disk": {

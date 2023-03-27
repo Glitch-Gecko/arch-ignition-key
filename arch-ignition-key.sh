@@ -202,29 +202,34 @@ plymouth-set-default-theme -R flame
 BLUE "[*] Enabling Pulse Audio..."
 su - $user -c "systemctl --user enable pulseaudio"
 
+BLUE "[*] Setting up man pages..."
+mandb
+
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){
     # Hypr dotfiles
+    BLUE "[*] Installing Hypr dotfiles..."
 	su - $user -c "mkdir /home/$user/.config; mkdir /home/$user/.config/hypr"
 	cp -r $SCRIPT_DIR/dotfiles/hypr /home/$user/.config/
 
 	# Sddm dotfiles
+    BLUE "[*] Installing Sddm dotfiles..."
 	cp -r $SCRIPT_DIR/dotfiles/sddm/themes /usr/share/sddm
 	cp $SCRIPT_DIR/dotfiles/sddm/sddm.conf /etc/sddm.conf
 	su - $user -c "mkdir /home/$user/Pictures"
 
-    # Copy wallpapers
-	cp -r $SCRIPT_DIR/wallpapers /home/$user/Pictures
-
 	# Kitty dotfiles
+    BLUE "[*] Installing Kitty dotfiles..."
 	cp -r $SCRIPT_DIR/dotfiles/kitty /home/$user/.config/
 	
 	# Grub dotfiles
+    BLUE "[*] Installing Grub dotfiles..."
 	cp -r $SCRIPT_DIR/dotfiles/grub/themes/sleek /usr/share/grub/themes
 	cp $SCRIPT_DIR/dotfiles/grub/grub /etc/default/
     grub-mkconfig -o /boot/grub/grub.cfg
 
 	# Discord/discocss dotfiles
+    BLUE "[*] Installing Discord dotfiles..."
 	git clone https://github.com/mlvzk/discocss
 	cp discocss/discocss /usr/bin
 	rm -rf discocss

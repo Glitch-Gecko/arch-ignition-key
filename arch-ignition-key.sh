@@ -156,7 +156,7 @@ shell_dependencies=("nvim-packer-git" "man-pages")
 misc_packages=("neofetch" "fortune-mod" "cowsay" "lolcat" "tty-clock-git" "thefuck" "btop")
 misc_dependencies=("imagemagick")
 
-application_packages=("firefox" "discord" "spotify-tui" "obsidian-appimage" "p7zip" "zathura")
+application_packages=("firefox" "discord" "spotify-tui" "obsidian-appimage" "p7zip" "zathura" "wofi" "dunst")
 application_dependencies=("spotify-tui" "zathura-pdf-mupdf")
 
 firmware_packages=("bluez" "pulseaudio-alsa" "wl-clipboard" "network-manager-applet" "grim" "pavucontrol" "slurp" "xbindkeys" "blueman")
@@ -295,6 +295,9 @@ function dotfiles(){
     BLUE "[*] Installing Dunst dotfiles..."
     cp -r $SCRIPT_DIR/dotfiles/dunst /home/$user/.config
 
+    # Wofi dotfiles
+    Blue "[*] Installing Wofi dotfiles..."
+    cp -r $SCRIPT_DIR/dotfiles/wofi /home/$user/.config
 
 	# Ownership
     BLUE "[*] Granting ownership..."

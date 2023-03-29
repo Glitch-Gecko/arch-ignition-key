@@ -156,8 +156,8 @@ shell_dependencies=("nvim-packer-git" "man-pages")
 misc_packages=("neofetch" "fortune-mod" "cowsay" "lolcat" "tty-clock-git" "thefuck" "btop")
 misc_dependencies=("imagemagick")
 
-application_packages=("firefox" "discord" "spotify-tui" "obsidian-appimage" "p7zip")
-application_dependencies=("spotify-tui")
+application_packages=("firefox" "discord" "spotify-tui" "obsidian-appimage" "p7zip" "zathura")
+application_dependencies=("spotify-tui" "zathura-pdf-mupdf")
 
 firmware_packages=("bluez" "pulseaudio-alsa" "wl-clipboard" "network-manager-applet" "grim" "pavucontrol" "slurp" "xbindkeys" "blueman")
 firmware_dependencies=("sof-firmware" "bluez-utils" "pulseaudio-bluetooth")
@@ -204,6 +204,9 @@ su - $user -c "systemctl --user enable pulseaudio"
 
 BLUE "[*] Setting up man pages..."
 mandb
+
+BLUE "[*] Setting up Zathura..."
+xdg-mime default org.pwmt.zathura.desktop application/pdf
 
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){
@@ -283,6 +286,15 @@ function dotfiles(){
     # Bat dotfiles
     BLUE "[*] Installing Bat dotfiles..."
     cp -r $SCRIPT_DIR/dotfiles/bat /home/$user/.config
+
+    # Zathura dotfiles
+    BLUE "[*] Installing Zathura dotfiles..."
+    cp -r $SCRIPT_DIR/dotfiles/zathura /home/$user/.config
+
+    # Dunst dotfiles
+    BLUE "[*] Installing Dunst dotfiles..."
+    cp -r $SCRIPT_DIR/dotfiles/dunst /home/$user/.config
+
 
 	# Ownership
     BLUE "[*] Granting ownership..."

@@ -196,7 +196,6 @@ BLUE "[*] Setting up Plymouth..."
 plymouth_search="HOOKS=(base udev"
 line_num=$(grep -n "HOOKS=(base udev" /etc/mkinitcpio.conf | awk 'END {print $1}' | cut -d: -f1)
 sed -i "$line_num"'s/$plymouth_search/$plymouth_search plymouth/' /etc/mkinitcpio.conf
-sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\(.*\)/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"/'
 plymouth-set-default-theme -R flame
 
 BLUE "[*] Enabling Pulse Audio..."
@@ -207,6 +206,9 @@ mandb
 
 BLUE "[*] Setting up Zathura..."
 xdg-mime default org.pwmt.zathura.desktop application/pdf
+
+BLUE "[*] Changing Headers..."
+sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\(.*\)/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"/' /etc/default/grub
 
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){

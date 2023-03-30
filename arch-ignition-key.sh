@@ -208,7 +208,7 @@ BLUE "[*] Setting up Zathura..."
 xdg-mime default org.pwmt.zathura.desktop application/pdf
 
 BLUE "[*] Changing Headers..."
-sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\(.*\)/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"/' /etc/default/grub
+sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\(.*\)/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash ibt=off"/' /etc/default/grub
 
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){

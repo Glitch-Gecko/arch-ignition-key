@@ -53,7 +53,6 @@
 
 <details open>
 <summary><h2>Features</h2></summary>
-<img align="right" src="assets/custom_discord.png"/>
 
 - Comprehensive window manager setup
 - Minimalist and focused design
@@ -71,6 +70,8 @@
 - Discord rich presence
  
 - *And many more!*
+<div align="center">
+<img src="assets/custom_discord.png"/>
 </details>
 
 ---

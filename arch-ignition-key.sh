@@ -99,7 +99,7 @@ if ! type "paru" > /dev/null; then
     BLUE "[*] Installing paru..."
     pacman -S --needed git base-devel --noconfirm
     su - $user -c "git clone https://aur.archlinux.org/paru.git"
-    su - $user -c "cd paru; makepkg -si"
+    su - $user -c "cd paru; makepkg -si && cd .."
     rm -rf paru
 fi
 

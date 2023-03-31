@@ -69,6 +69,8 @@
 - Unique startup experience
 - *Blazingly* fast system
 - Discord rich presence
+ 
+- *And many more!*
 </details>
 
 ---

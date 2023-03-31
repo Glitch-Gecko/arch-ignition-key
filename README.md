@@ -1,7 +1,18 @@
 <div align="center">
-
-# Glitch-Gecko's Arch Ignition Key
-<a href='#'><img src="./assets/term_browser.png" alt="Arch Ignition Key" height="500px"></a>
+<img src="./assets/Glitch_gecko_circle.png" width="150">
+ 
+### Glitch-Gecko's Arch Ignition Key
+ <h6 align="center">
+  <a href="https://github.com/Glitch-Gecko/arch-ignition-key#Screenshots">Screenshots</a>
+  ·
+  <a href="https://github.com/Glitch-Gecko/arch-ignition-key#Features">Features</a>
+  ·
+  <a href="https://github.com/Glitch-Gecko/arch-ignition-key#Installation">Installation</a>
+</h6>
+ 
+---
+ 
+<img src="./assets/term_browser.png" alt="Arch Ignition Key" height="500px">
 </div>
 
 <img align="right" src="assets/Rice.png" alt="Rice Preview" width="300px"/>

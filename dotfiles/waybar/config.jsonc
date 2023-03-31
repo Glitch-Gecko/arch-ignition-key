@@ -83,6 +83,23 @@
         "on-click": "kitty --title floating_kitty sh -c 'neofetch --kitty; read'",
         "interval": 2
     },
+    "custom/music": {
+        "format": "{icon}{}",
+        "format-icons": {
+            // "Playing": " ", // Uncomment if not using the dynamic script
+            "Paused": " ",
+            "Stopped": "&#x202d;ﭥ " // This stop symbol is RTL. So &#x202d; is left-to-right override.
+        },
+        "escape": true,
+        "tooltip": true,
+        "exec": "~/.config/waybar/caway -b 10 -e",
+        "return-type": "json",
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl previous",
+        "on-scroll-down": "playerctl next",
+        "on-click-right": "kitty --title floating_kitty sh -c 'spt'",
+        "max-length": 35
+    },
     "hyprland/window": {
         "format": "{}",
         "separate-outputs": true,

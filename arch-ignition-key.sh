@@ -147,7 +147,7 @@ function ask_for_packages() {
 # Package groups
 drivers=("mesa")
 
-display_packages=("hyprland" "swww" "sddm-git" "kitty" "alacritty" "waybar-hyprland" "plymouth-git" "light")
+display_packages=("hyprland" "swww" "sddm-git" "kitty" "alacritty" "waybar-hyprland" "plymouth-git" "light" "cava")
 display_dependencies=("qt5-graphicaleffects" "qt5-svg" "qt5-quickcontrols2" "plymouth-theme-flame-git")
 
 shell_packages=("zsh" "neovim" "starship" "tree" "ttf-hack-nerd" "noto-fonts" "noto-fonts-emoji" "man-db")

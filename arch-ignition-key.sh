@@ -269,8 +269,8 @@ function dotfiles(){
 
 	# Zsh dotfiles
     BLUE "[*] Installing Zsh dotfiles..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh//plugins/zsh-autosuggestions
+    sh - $user -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+    git clone https://github.com/zsh-users/zsh-autosuggestions /home/$user/.oh-my-zsh//plugins/zsh-autosuggestions
 	cp $SCRIPT_DIR/dotfiles/zsh/.zshrc /home/$user/
 
     # Neofetch dotfiles

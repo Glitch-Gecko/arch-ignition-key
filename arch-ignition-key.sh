@@ -269,7 +269,7 @@ function dotfiles(){
 
 	# Zsh dotfiles
     BLUE "[*] Installing Zsh dotfiles..."
-    sh - $user -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+    su -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc' $user
     git clone https://github.com/zsh-users/zsh-autosuggestions /home/$user/.oh-my-zsh//plugins/zsh-autosuggestions
 	cp $SCRIPT_DIR/dotfiles/zsh/.zshrc /home/$user/
 
@@ -296,7 +296,7 @@ function dotfiles(){
     # Bat dotfiles
     BLUE "[*] Installing Bat dotfiles..."
     cp -r $SCRIPT_DIR/dotfiles/bat /home/$user/.config
-    bash - $user -c "bat cache --build"
+    su -c 'sh -c "bat cache --build"' $user
 
     # Zathura dotfiles
     BLUE "[*] Installing Zathura dotfiles..."

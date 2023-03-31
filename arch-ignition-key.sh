@@ -1,5 +1,5 @@
 #!/bin/bash
-# Arch install script by Ainchentmew2
+# Arch install script by Glitch-Gecko
 # Credit to John Hammond for colors
 # Credit to An00bRektn for script idea
 
@@ -94,7 +94,7 @@ echo "$user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 # Grant ownership to user
 chown -R $user /home/$user/arch-ignition-key
 
-# Check if paru installed, install paru
+# Check if paru not installed, install paru
 if ! type "paru" > /dev/null; then
     BLUE "[*] Installing paru..."
     pacman -S --needed git base-devel --noconfirm

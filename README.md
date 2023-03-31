@@ -47,7 +47,6 @@
 <img src="./assets/notes.png">
 <img src="./assets/hey_there.png">
 <img src="./assets/sddm.png">
-<img src="./assets/custom_discord.png">
 </details>
 
 ---

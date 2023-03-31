@@ -16,7 +16,7 @@ usage() {
 }
 
 # Get options from command line
-while getopts ":AdyY-:" opt; do
+while getopts ":AadyY-:" opt; do
   case $opt in
     A )
       APPLY_ALL="yes"

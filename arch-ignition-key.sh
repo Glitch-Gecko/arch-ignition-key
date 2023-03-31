@@ -249,7 +249,7 @@ function dotfiles(){
 	rm -rf prism
 	cp $SCRIPT_DIR/dotfiles/firefox/mozilla.cfg /usr/lib/firefox/
 	cp $SCRIPT_DIR/dotfiles/firefox/local-settings.js /usr/lib/firefox/defaults/pref/
-    echo -e 'user_pref("browser.startup.homepage", "file:///home/${user}/.mozilla/firefox/prism/index.html");' >> /home/$user/.mozilla/firefox/*.default*/prefs.js
+    echo -e 'user_pref("browser.startup.homepage", "file:///home/'"$user"'/.mozilla/firefox/prism/index.html");' >> /home/$user/.mozilla/firefox/*.default*/prefs.js
 
 	# Alacritty dotfiles
     BLUE "[*] Installing Alacritty dotfiles..."

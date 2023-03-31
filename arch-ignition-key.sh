@@ -150,7 +150,7 @@ drivers=("mesa")
 display_packages=("hyprland" "swww" "sddm-git" "kitty" "alacritty" "waybar-hyprland" "plymouth-git" "light" "cava")
 display_dependencies=("qt5-graphicaleffects" "qt5-svg" "qt5-quickcontrols2" "plymouth-theme-flame-git")
 
-shell_packages=("zsh" "neovim" "starship" "tree" "ttf-hack-nerd" "noto-fonts" "noto-fonts-emoji" "man-db")
+shell_packages=("zsh" "neovim" "starship" "tree" "ttf-hack-nerd" "noto-fonts" "noto-fonts-emoji" "man-db" "bat")
 shell_dependencies=("nvim-packer-git" "man-pages")
 
 misc_packages=("neofetch" "fortune-mod" "cowsay" "lolcat" "tty-clock-git" "thefuck" "btop")
@@ -288,6 +288,7 @@ function dotfiles(){
     # Bat dotfiles
     BLUE "[*] Installing Bat dotfiles..."
     cp -r $SCRIPT_DIR/dotfiles/bat /home/$user/.config
+    bash -c "bat cache --build"
 
     # Zathura dotfiles
     BLUE "[*] Installing Zathura dotfiles..."

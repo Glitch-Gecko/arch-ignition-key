@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./assets/Glitch_gecko_circle.png" width="150">
+<img src="./assets/Glitch_gecko_circle.png" width="150px">
  
 ### Glitch-Gecko's Arch Ignition Key
  <h6 align="center">
@@ -12,10 +12,10 @@
  
 ---
  
-<img src="./assets/term_browser.png" alt="Arch Ignition Key" height="500px">
+<img src="./assets/term_browser.png" width="90%">
 </div>
 
-<img align="right" src="assets/Rice.png" alt="Rice Preview" width="300px"/>
+<img align="right" src="assets/Rice.png" width="28%"/>
 
 ```mint
 ⠀⠀   🚀 Arch Ignition Key Setup 🚀
@@ -53,7 +53,7 @@
 
 <details open>
 <summary><h2>Features</h2></summary>
-<img align="right" src="assets/custom_discord.png" alt="Rich presence" width="200px"/>
+<img align="right" src="assets/custom_discord.png" width="20%"/>
 
 - Comprehensive window manager setup
 - Minimalist and focused design

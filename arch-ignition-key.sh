@@ -88,13 +88,13 @@ echo "$user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 # Grant ownership to user
 chown -R $user /home/$user/arch-ignition-key
 
-# Check if yay installed, install yay
-if ! type "yay" > /dev/null; then
-    BLUE "[*] Installing yay..."
+# Check if paru installed, install paru
+if ! type "paru" > /dev/null; then
+    BLUE "[*] Installing paru..."
     pacman -S --needed git base-devel --noconfirm
-    su - $user -c "git clone https://aur.archlinux.org/yay.git"
-    su - $user -c "cd yay; makepkg -si"
-    rm -rf yay
+    su - $user -c "git clone https://aur.archlinux.org/paru.git"
+    su - $user -c "cd paru; makepkg -si"
+    rm -rf paru
 fi
 
 # Function to handle package installation
@@ -102,7 +102,7 @@ function install_packages() {
     for package in "${@}"; do
         if ! pacman -Qq "$package" &> /dev/null; then
             BLUE "[*] Installing $package..."
-            su - $user -c "yay -S --answerdiff=None --noconfirm --needed $package"
+            su - $user -c "paru -S --noconfirm --needed $package"
         else
             GREEN "[*] ${package} is already installed."
         fi

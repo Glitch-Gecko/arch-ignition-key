@@ -187,7 +187,7 @@ sudo sed -i "s/\/home\/$user:\/usr\/bin\/bash/\/home\/$user:\/usr\/bin\/zsh/" /e
 chsh -s /bin/zsh $user
 
 BLUE "[*] Setting up Spotify..."
-su - $user -c "systemctl --user enable spotifyd.service"
+systemctl --user -M $user@ enable spotifyd
 
 BLUE "[*] Setting up Light..."
 echo 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"' > /etc/udev/rules.d/backlight.rules
@@ -199,7 +199,7 @@ sed -i "$line_num"'s/$plymouth_search/$plymouth_search plymouth/' /etc/mkinitcpi
 plymouth-set-default-theme -R flame
 
 BLUE "[*] Enabling Pulse Audio..."
-su - $user -c "systemctl --user enable pulseaudio"
+systemctl --user -M $user@ enable pulseaudio
 
 BLUE "[*] Setting up man pages..."
 mandb

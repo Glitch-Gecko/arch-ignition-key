@@ -227,7 +227,6 @@ function dotfiles(){
     BLUE "[*] Installing Sddm dotfiles..."
 	cp -r $SCRIPT_DIR/dotfiles/sddm/themes /usr/share/sddm
 	cp $SCRIPT_DIR/dotfiles/sddm/sddm.conf /etc/sddm.conf
-	su - $user -c "mkdir /home/$user/Pictures"
 
 	# Kitty dotfiles
     BLUE "[*] Installing Kitty dotfiles..."
@@ -316,7 +315,7 @@ function dotfiles(){
 
 	# Ownership
     BLUE "[*] Granting ownership..."
-	chown -R $user /home/$user/.config /usr/share/sddm/themes /etc/sddm.conf /home/$user/Pictures /usr/share/grub/themes/sleek /home/$user/.zshrc
+	chown -R $user /usr/share/sddm/themes /etc/sddm.conf /usr/share/grub/themes/sleek /home/$user
 }
 
 if [[ $APPLY_DOTFILES_PROMPT == "yes" ]]; then

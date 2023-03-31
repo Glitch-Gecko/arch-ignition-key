@@ -15,7 +15,7 @@
 <img src="./assets/term_browser.png" width="90%">
 </div>
 
-<img align="right" src="assets/Rice.png" width="28%"/>
+<img align="right" src="assets/Rice.png" width="285px"/>
 
 ```mint
 ⠀⠀   🚀 Arch Ignition Key Setup 🚀
@@ -53,7 +53,7 @@
 
 <details open>
 <summary><h2>Features</h2></summary>
-<img align="right" src="assets/custom_discord.png" width="20%"/>
+<img align="right" src="assets/custom_discord.png"/>
 
 - Comprehensive window manager setup
 - Minimalist and focused design

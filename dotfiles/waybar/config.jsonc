@@ -170,8 +170,8 @@
         "bat": "BAT1",
         "states": {
             "good": 100,
-            "warning": 30,
-            "critical": 10
+            "warning": 25,
+            "critical": 5
         },
         "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",

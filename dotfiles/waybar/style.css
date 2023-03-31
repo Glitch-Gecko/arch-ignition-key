@@ -116,7 +116,7 @@
 
 #workspaces button {
   background-color: @surface3;
-  color: @mauve;
+  color: @lavender;
   border-radius: 100%;
   min-height: 14px;
   min-width: 14px;
@@ -138,7 +138,7 @@
 }
 
 #workspaces button:hover {
-  background-color: @mauve;
+  background-color: @lavender;
 }
 
 @keyframes gradient {
@@ -285,7 +285,7 @@
 /* =============================== */
 /* Music/PlayerCTL Module */
 #custom-music {
-  color: @mauve;
+  color: @lavender;
 }
 
 /* =============================== */
@@ -307,7 +307,7 @@
 /* =============================== */
 /* PulseAudio Module */
 #pulseaudio {
-  color: @mauve;
+  color: @lavender;
   border-radius: 0;
   margin-right: 0px;
   padding-left: 5px;
@@ -368,7 +368,7 @@
 /* =============================== */
 /* Tray Module */
 #tray {
-  color: @mauve;
+  color: @lavender;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   padding-left: 8px;
@@ -391,7 +391,7 @@
 
 /* Powermenu Module */
 #custom-power {
-  color: @mauve;
+  color: @lavender;
   padding-left: 0.9rem;
   padding-right: 1.20rem;
 }

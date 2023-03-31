@@ -157,7 +157,7 @@ misc_packages=("neofetch" "fortune-mod" "cowsay" "lolcat" "tty-clock-git" "thefu
 misc_dependencies=("imagemagick")
 
 application_packages=("firefox" "discord" "spotify-tui" "obsidian-appimage" "p7zip" "zathura" "wofi" "dunst")
-application_dependencies=("spotify-tui" "zathura-pdf-mupdf")
+application_dependencies=("spotifyd" "zathura-pdf-mupdf" "playerctl" "jq" "gnome-keyring")
 
 firmware_packages=("bluez" "pulseaudio-alsa" "wl-clipboard" "network-manager-applet" "grim" "pavucontrol" "slurp" "xbindkeys" "blueman")
 firmware_dependencies=("sof-firmware" "bluez-utils" "pulseaudio-bluetooth")
@@ -249,7 +249,7 @@ function dotfiles(){
 	rm -rf prism
 	cp $SCRIPT_DIR/dotfiles/firefox/mozilla.cfg /usr/lib/firefox/
 	cp $SCRIPT_DIR/dotfiles/firefox/local-settings.js /usr/lib/firefox/defaults/pref/
-    #echo -e 'user_pref("browser.startup.homepage", "file:///home/$user/.mozilla/firefox/prism/index.html");' >> /home/$user/.mozilla/firefox/*.default*/prefs.js
+    echo -e 'user_pref("browser.startup.homepage", "file:///home/${user}/.mozilla/firefox/prism/index.html");' >> /home/$user/.mozilla/firefox/*.default*/prefs.js
 
 	# Alacritty dotfiles
     BLUE "[*] Installing Alacritty dotfiles..."
@@ -299,8 +299,12 @@ function dotfiles(){
     cp -r $SCRIPT_DIR/dotfiles/dunst /home/$user/.config
 
     # Wofi dotfiles
-    Blue "[*] Installing Wofi dotfiles..."
+    BLUE "[*] Installing Wofi dotfiles..."
     cp -r $SCRIPT_DIR/dotfiles/wofi /home/$user/.config
+    
+    # Spotifyd dotfiles
+    BLUE "[*] Installing spotifyd dotfiles..."
+    cp -r $SCRIPT_DIR/dotfiles/spotifyd /home/$user/.config
 
 	# Ownership
     BLUE "[*] Granting ownership..."

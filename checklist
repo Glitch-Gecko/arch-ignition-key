@@ -1,0 +1,8 @@
+Set firefox stuff (dark mode, catppuccin theme, bitwarden)
+
+Configure spotify and spotify-tui
+secret-tool store --label='name you choose' application rust-keyring service spotifyd username <your-username>
+
+Install vim plugins:
+:PackerUpdate
+:COQdeps

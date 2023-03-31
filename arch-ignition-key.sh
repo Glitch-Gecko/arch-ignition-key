@@ -296,7 +296,7 @@ function dotfiles(){
     # Bat dotfiles
     BLUE "[*] Installing Bat dotfiles..."
     cp -r $SCRIPT_DIR/dotfiles/bat /home/$user/.config
-    bash -c "bat cache --build"
+    bash - $user -c "bat cache --build"
 
     # Zathura dotfiles
     BLUE "[*] Installing Zathura dotfiles..."

@@ -20,7 +20,12 @@ while getopts ":AdyY-:" opt; do
   case $opt in
     A )
       APPLY_ALL="yes"
+      APPLY_DOTFILES_PROMPT="yes"
       ;;
+    a )
+      APPLY_PACKAGES="yes"
+      APPLY_DOTFILES_PROMPT="yes"
+      APPLY_DRIVER_PACKAGES="no"
     d )
       APPLY_DOTFILES_PROMPT="yes"
       ;;

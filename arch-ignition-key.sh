@@ -26,6 +26,7 @@ while getopts ":AdyY-:" opt; do
       APPLY_PACKAGES="yes"
       APPLY_DOTFILES_PROMPT="yes"
       APPLY_DRIVER_PACKAGES="no"
+      ;;
     d )
       APPLY_DOTFILES_PROMPT="yes"
       ;;

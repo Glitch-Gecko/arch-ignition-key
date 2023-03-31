@@ -1,86 +1,99 @@
-
 <div align="center">
 
-# Arch Ignition Key
-
-Scripts and dotfiles to automate the setup of a fresh Arch Linux install easily, with my custom configuration
-
+# Glitch-Gecko's Arch Ignition Key
+<a href='#'><img src="./assets/term_browser.png" alt="Arch Ignition Key" height="500px"></a>
 </div>
 
-### Configuration
+<img align="right" src="assets/Rice.png" alt="Rice Preview" width="300px"/>
 
+```mint
+⠀⠀   🚀 Arch Ignition Key Setup 🚀
+ --------------------------------------
+
+ ╭─ Distro          -> Arch Linux x86_64
+ ├─ Window Manager  -> Hyprland
+ ├─ Terminal        -> Kitty
+ ├─ Browser         -> Firefox
+ ├─ Shell           -> Oh-My-ZSH
+ ╰─ Resource Monitor -> Btop
+
+ ╭─ Editor     -> Neovim
+ ├─ Notes      -> Obsidian
+ ├─ Font       -> Hack Nerd Font
+ ├─ Taskbar    -> Waybar
+ ├─ Bootloader -> Grub
+ ├─ Lockscreen -> SDDM
+ ├─ Chat       -> Discord
+ ├─ Startup    -> Plymouth
+ ├─ Music      -> Spotify-tui
+ ╰─ Launcher   -> Wofi
+
+   ⚙️   🌐   🚀   💻   🎶   📚   🖼️   🌈
 ```
-WM                  Hyprland
-Terminal            Kitty
-Theme               Catppuccin
-Browser             Firefox
-Shell               Oh-My-ZSH
-Editor              Neovim
-Notes               Obsidian
-Font                Hack Nerd Font
-Taskbar             Waybar
-Chat                Discord
-Music               Spotify-tui
-Fetch               Neofetch
-Top                 Btop
-Lockscreen          Sddm
-SDDM theme          Sugar Candy
-Boot loader         Grub
-Grub theme          Sleek
-Startup animation   Plymouth
-Pdf viewer          Zathura
-Launcher            Wofi
 
-... and many more!
-```
-
-### Screenshots
-<img src="./assets/term_browser.png">
-<img src="./assets/sysinfo.png">
-<img src="./assets/nvim.png">
+<details open>
+<summary><h2>Screenshots</h2></summary>
 <img src="./assets/notes.png">
+<img src="./assets/hey_there.png">
 <img src="./assets/sddm.png">
-<img src="./assets/spt.png">
 <img src="./assets/custom_discord.png">
+</details>
 
 ---
 
-### Features
-- Fully fleshed-out window manager
-- Non-distracting design
+<details open>
+<summary><h2>Features</h2></summary>
+<img align="right" src="assets/custom_discord.png" alt="Rich presence" width="200px"/>
+
+- Comprehensive window manager setup
+- Minimalist and focused design
 - Custom hotkeys and window rules
-- Easy notetaking and development
+- Streamlined notetaking and development
 - Git integrations
 - Custom firefox and discord themes
 - Wifi, bluetooth, and audio GUIs
 - Wallpaper switching
-- Customizable dots
-- Duckyscript for archiso
-- Automated setup
-- Unique startup
-- *Blazingly* fast
+- Customizable dotfiles
+- Duckyscript for Archiso
+- Automated setup process
+- Unique startup experience
+- *Blazingly* fast system
 - Discord rich presence
+</details>
 
 ---
 
-### Installation
+<details open>
+<summary><h2>Installation</h2></summary>
+
 ```sh
 git clone https://github.com/ainchentmew2/arch-ignition-key
 cd arch-ignition-key
 sudo ./arch-ignition-key.sh -a
 ```
+
+</details>
+
 <div align="center">
 
-#### Enjoy!
-
-</div>
+### Enjoy!</div>
 
 ---
 
-### Credits
+<details>
+<summary><h2>Credits</h2></summary>
 
-[r/unixporn](https://www.reddit.com/r/unixporn)
+- [r/unixporn](https://www.reddit.com/r/unixporn) - For inspiration and guidance
 
-[Arch wiki](https://wiki.archlinux.org)
+- [Arch wiki and its maintainers](https://wiki.archlinux.org) - For outstanding documentation and references
+  
+- [Chat GPT](https://chat.openai.com) - For help with oddly specific issues
+ 
+</details></div>
+  
+---
+  
+<div align="center">
 
-[Chat GPT](https://chat.openai.com)
+### *Thank you for using my Arch Ignition Key! Have fun with your new setup!*
+</div>

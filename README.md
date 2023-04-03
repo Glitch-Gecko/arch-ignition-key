@@ -2,7 +2,8 @@
 <img src="./assets/Glitch_gecko_circle.png" width="150px">
  
 ### Glitch-Gecko's Arch Ignition Key
- <h6 align="center">
+###### Scripts and dotfiles for an easy setup of Arch Linux, designed for a fresh install.
+ <h6>
   <a href="https://github.com/Glitch-Gecko/arch-ignition-key#Screenshots">Screenshots</a>
   ·
   <a href="https://github.com/Glitch-Gecko/arch-ignition-key#Features">Features</a>

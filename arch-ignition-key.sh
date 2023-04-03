@@ -222,6 +222,7 @@ function dotfiles(){
     BLUE "[*] Installing Hypr dotfiles..."
 	su - $user -c "mkdir /home/$user/.config; mkdir /home/$user/.config/hypr"
 	cp -r $SCRIPT_DIR/dotfiles/hypr /home/$user/.config/
+    cp $SCRIPT_DIR/dotfiles/hypr/config.ini /home/$user/
 
 	# Sddm dotfiles
     BLUE "[*] Installing Sddm dotfiles..."

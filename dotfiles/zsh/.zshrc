@@ -112,7 +112,7 @@ alias bth="sudo systemctl start bluetooth; nohup blueman-applet >/dev/null 2>&1 
 alias bat="bat --paging=never"
 
 open() {
-    for file in $(printf '%s\n' "$@"); do xdg-open "$file"; done
+    for file in $(printf '%s\n' "$@"); do (xdg-open "$file" &); done
 }
 
 bindkey "^[[1;5C" forward-word

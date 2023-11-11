@@ -165,7 +165,7 @@ misc_dependencies=("imagemagick")
 application_packages=("firefox" "discord" "spotify-tui" "obsidian-appimage" "p7zip" "zathura" "wofi" "dunst")
 application_dependencies=("spotifyd" "zathura-pdf-mupdf" "playerctl" "jq" "gnome-keyring")
 
-firmware_packages=("bluez" "pulseaudio-alsa" "wl-clipboard" "network-manager-applet" "grim" "pavucontrol" "slurp" "xbindkeys" "blueman" "pipewire" "wireplumber" "xdg-desktop-portal-hyprland-git" "xdg-desktop-portal-gtk")
+firmware_packages=("bluez" "pulseaudio-alsa" "wl-clipboard" "network-manager-applet" "grim" "pavucontrol" "slurp" "xbindkeys" "blueman" "pipewire" "wireplumber" "xdg-desktop-portal-hyprland-git" "xdg-desktop-portal-gtk" "xwaylandvideobridge-git")
 firmware_dependencies=("sof-firmware" "bluez-utils" "pulseaudio-bluetooth")
 
 packages=()

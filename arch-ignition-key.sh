@@ -242,14 +242,6 @@ function dotfiles(){
 	cp grub/grub /etc/default/
     grub-mkconfig -o /boot/grub/grub.cfg
 
-	# Discord/discocss dotfiles
-    BLUE "[*] Installing Discord dotfiles..."
-	git clone https://github.com/mlvzk/discocss
-	cp discocss/discocss /usr/bin
-	rm -rf discocss
-	su - $user -c "mkdir /home/$user/.config/discocss"
-	curl -L https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css > /home/$user/.config/discocss/custom.css
-
 	# Firefox dotfiles
     BLUE "[*] Installing Firefox dotfiles..."
 	git clone https://github.com/PROxZIMA/prism

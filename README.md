@@ -14,6 +14,12 @@
 ---
  
 <img src="./assets/term_browser.png" width="90%">
+
+<video width="90%" autoplay>
+  <source src="./assets/startup.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
 </div>
 
 <img align="right" src="assets/Rice.png" width="285px"/>

@@ -218,25 +218,28 @@ sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\(.*\)/GRUB_CMDLINE_LINUX_DEFAULT="loglevel
 
 # Comment out any of the following dotfiles to keep current files
 function dotfiles(){
+    git clone https://github.com/Glitch-Gecko/configs.git
+    cd configs/dotfiles
+
     # Hypr dotfiles
     BLUE "[*] Installing Hypr dotfiles..."
 	su - $user -c "mkdir /home/$user/.config; mkdir /home/$user/.config/hypr"
-	cp -r $SCRIPT_DIR/dotfiles/hypr /home/$user/.config/
-    cp $SCRIPT_DIR/dotfiles/hypr/config.ini /home/$user/
+	cp -r hypr /home/$user/.config/
+    cp hypr/config.ini /home/$user/
 
 	# Sddm dotfiles
     BLUE "[*] Installing Sddm dotfiles..."
-	cp -r $SCRIPT_DIR/dotfiles/sddm/themes /usr/share/sddm
-	cp $SCRIPT_DIR/dotfiles/sddm/sddm.conf /etc/sddm.conf
+	cp -r sddm/themes /usr/share/sddm
+	cp sddm/sddm.conf /etc/sddm.conf
 
 	# Kitty dotfiles
     BLUE "[*] Installing Kitty dotfiles..."
-	cp -r $SCRIPT_DIR/dotfiles/kitty /home/$user/.config/
+	cp -r kitty /home/$user/.config/
 	
 	# Grub dotfiles
     BLUE "[*] Installing Grub dotfiles..."
-	cp -r $SCRIPT_DIR/dotfiles/grub/themes/sleek /usr/share/grub/themes
-	cp $SCRIPT_DIR/dotfiles/grub/grub /etc/default/
+	cp -r grub/themes/sleek /usr/share/grub/themes
+	cp grub/grub /etc/default/
     grub-mkconfig -o /boot/grub/grub.cfg
 
 	# Discord/discocss dotfiles
@@ -253,66 +256,66 @@ function dotfiles(){
 	chown -R $user prism
 	cp -r prism /home/$user/.mozilla/firefox/
 	rm -rf prism
-	cp $SCRIPT_DIR/dotfiles/firefox/mozilla.cfg /usr/lib/firefox/
-	cp $SCRIPT_DIR/dotfiles/firefox/local-settings.js /usr/lib/firefox/defaults/pref/
+	cp firefox/mozilla.cfg /usr/lib/firefox/
+	cp firefox/local-settings.js /usr/lib/firefox/defaults/pref/
     echo -e 'user_pref("browser.startup.homepage", "file:///home/'"$user"'/.mozilla/firefox/prism/index.html");' >> /home/$user/.mozilla/firefox/*.default*/prefs.js
 
 	# Alacritty dotfiles
     BLUE "[*] Installing Alacritty dotfiles..."
 	mkdir /home/$user/.config/alacritty
-	cp $SCRIPT_DIR/dotfiles/alacritty/alacritty.yml /home/$user/.config/alacritty
+	cp alacritty/alacritty.yml /home/$user/.config/alacritty
 	su - $user -c "git clone https://github.com/catppuccin/alacrity.git ~/.config/alacritty/catppuccin"
 
 	# Nvim dotfiles
     BLUE "[*] Installing Nvim dotfiles..."
-	cp -r $SCRIPT_DIR/dotfiles/nvim/ /home/$user/.config/
+	cp -r nvim/ /home/$user/.config/
 
 	# Zsh dotfiles
     BLUE "[*] Installing Zsh dotfiles..."
     su -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc' $user
     git clone https://github.com/zsh-users/zsh-autosuggestions /home/$user/.oh-my-zsh//plugins/zsh-autosuggestions
-	cp $SCRIPT_DIR/dotfiles/zsh/.zshrc /home/$user/
+	cp zsh/.zshrc /home/$user/
 
     # Neofetch dotfiles
     BLUE "[*] Installing Neofetch dotfiles..."
-    cp -r $SCRIPT_DIR/dotfiles/neofetch /home/$user/.config/
+    cp -r neofetch /home/$user/.config/
 
     # Starship dotfiles
     BLUE "[*] Installing Starship dotfiles..."
-    cp $SCRIPT_DIR/dotfiles/starship.toml /home/$user/.config/starship.toml
+    cp starship.toml /home/$user/.config/starship.toml
 
     # Spotifyd dotfiles
     BLUE "[*] Installing Spotifyd dotfiles..."
-    cp -r $SCRIPT_DIR/dotfiles/systemd /home/$user/.config/
+    cp -r systemd /home/$user/.config/
 
     # Waybar dotfiles
     BLUE "[*] Installing Waybar dotfiles..."
-    cp -r $SCRIPT_DIR/dotfiles/waybar /home/$user/.config
+    cp -r waybar /home/$user/.config
 
     # Btop dotfiles
     BLUE "[*] Installing Btop dotfiles..."
-    cp -r $SCRIPT_DIR/dotfiles/btop /home/$user/.config
+    cp -r btop /home/$user/.config
     
     # Bat dotfiles
     BLUE "[*] Installing Bat dotfiles..."
-    cp -r $SCRIPT_DIR/dotfiles/bat /home/$user/.config
+    cp -r bat /home/$user/.config
     su -c 'sh -c "bat cache --build"' $user
 
     # Zathura dotfiles
     BLUE "[*] Installing Zathura dotfiles..."
-    cp -r $SCRIPT_DIR/dotfiles/zathura /home/$user/.config
+    cp -r zathura /home/$user/.config
 
     # Dunst dotfiles
     BLUE "[*] Installing Dunst dotfiles..."
-    cp -r $SCRIPT_DIR/dotfiles/dunst /home/$user/.config
+    cp -r dunst /home/$user/.config
 
     # Wofi dotfiles
     BLUE "[*] Installing Wofi dotfiles..."
-    cp -r $SCRIPT_DIR/dotfiles/wofi /home/$user/.config
+    cp -r wofi /home/$user/.config
     
     # Spotifyd dotfiles
     BLUE "[*] Installing spotifyd dotfiles..."
-    cp -r $SCRIPT_DIR/dotfiles/spotifyd /home/$user/.config
+    cp -r spotifyd /home/$user/.config
 
     # Polkit dotfiles
     BLUE "[*] Installing polkit dotfiles..."
@@ -321,6 +324,9 @@ function dotfiles(){
 	# Ownership
     BLUE "[*] Granting ownership..."
 	chown -R $user /usr/share/sddm/themes /etc/sddm.conf /usr/share/grub/themes/sleek /home/$user
+
+    cd ../..
+    rm -rf configs
 }
 
 if [[ $APPLY_DOTFILES_PROMPT == "yes" ]]; then

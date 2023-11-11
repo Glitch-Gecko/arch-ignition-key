@@ -15,9 +15,8 @@
  
 <img src="./assets/term_browser.png" width="90%">
 
-<video width="90%" autoplay>
-  <source src="./assets/startup.mp4" type="video/mp4">
-Your browser does not support the video tag.
+https://github.com/Glitch-Gecko/arch-ignition-key/assets/17220280/73b66299-b187-45e7-bb83-fa9e281fe574
+
 </video>
 
 </div>

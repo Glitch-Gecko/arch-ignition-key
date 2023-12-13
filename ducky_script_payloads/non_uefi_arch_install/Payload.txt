@@ -55,7 +55,7 @@ STRINGLN usermod -aG wheel,audio,video,storage,vboxusers $new_user
 STRINGLN wheel_var="%wheel ALL=(ALL:ALL) ALL"; sed -i "/^# $wheel_var/ c$wheel_var" /etc/sudoers
 STRINGLN pacman -Sy --noconfirm networkmanager git
 STRINGLN systemctl enable NetworkManager.service
-STRINGLN git clone https://github.com/Ainchentmew2/arch-ignition-key /home/$new_user/arch-ignition-key
+STRINGLN git clone https://github.com/Glitch-Gecko/arch-ignition-key /home/$new_user/arch-ignition-key
 STRINGLN chown $new_user /home/$new_user/arch-ignition-key
 STRINGLN exit
 STRINGLN umount -l /mnt

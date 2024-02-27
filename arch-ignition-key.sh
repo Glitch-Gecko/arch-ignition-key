@@ -157,7 +157,7 @@ display_packages=("hyprland" "swww" "sddm-git" "kitty" "alacritty" "waybar-hyprl
 display_dependencies=("qt5-graphicaleffects" "qt5-svg" "qt5-quickcontrols2" "plymouth-theme-flame-git")
 
 shell_packages=("zsh" "neovim" "starship" "tree" "ttf-hack-nerd" "noto-fonts" "noto-fonts-emoji" "man-db" "bat")
-shell_dependencies=("nvim-packer-git" "man-pages")
+shell_dependencies=("nvim-packer-git" "man-pages" "ripgrep-all")
 
 misc_packages=("neofetch" "fortune-mod" "cowsay" "lolcat" "tty-clock-git" "thefuck" "btop")
 misc_dependencies=("imagemagick")

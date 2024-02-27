@@ -56,7 +56,11 @@ STRINGLN wheel_var="%wheel ALL=(ALL:ALL) ALL"; sed -i "/^# $wheel_var/ c$wheel_v
 STRINGLN pacman -Sy --noconfirm networkmanager git
 STRINGLN systemctl enable NetworkManager.service
 STRINGLN git clone https://github.com/Glitch-Gecko/arch-ignition-key /home/$new_user/arch-ignition-key
+<<<<<<< HEAD
 STRINGLN chown -R $new_user /home/$new_user/arch-ignition-key
+=======
+STRINGLN chown $new_user /home/$new_user/arch-ignition-key
+>>>>>>> 8b91ce1c366853d47e07330d1d93c0cee19edebe
 STRINGLN exit
 STRINGLN umount -l /mnt
 STRINGLN reboot

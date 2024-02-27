@@ -14,6 +14,11 @@
 ---
  
 <img src="./assets/term_browser.png" width="90%">
+
+https://github.com/Glitch-Gecko/arch-ignition-key/assets/17220280/73b66299-b187-45e7-bb83-fa9e281fe574
+
+</video>
+
 </div>
 
 <img align="right" src="assets/Rice.png" width="285px"/>

@@ -1,7 +1,7 @@
 <div align="center">
 <img src="./assets/Glitch_gecko_circle.png" width="150px">
  
-### Glitch-Gecko's Arch Ignition Key
+### GlitchGecko's Arch Ignition Key
 ###### Scripts and dotfiles for an easy setup of Arch Linux, designed for a fresh install.
  <h6>
   <a href="https://github.com/Glitch-Gecko/arch-ignition-key#Screenshots">Screenshots</a>
@@ -81,7 +81,7 @@
 <summary><h2>Installation</h2></summary>
 
 ```sh
-git clone https://github.com/ainchentmew2/arch-ignition-key
+git clone https://github.com/Glitch-Gecko/arch-ignition-key
 cd arch-ignition-key
 sudo ./arch-ignition-key.sh -a
 ```

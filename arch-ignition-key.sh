@@ -1,5 +1,5 @@
 #!/bin/bash
-# Arch install script by Glitch-Gecko
+# Arch install script by GlitchGecko
 # Credit to John Hammond for colors
 # Credit to An00bRektn for script idea
 
